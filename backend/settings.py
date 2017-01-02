@@ -1,2 +1,2 @@
 DB_PORT = 27017
-DB_ADDRESS = 
+DB_ADDRESS = "localhost"

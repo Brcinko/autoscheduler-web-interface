@@ -1,17 +1,18 @@
 """
     server, author: Lukas Klescinec <lukas.klescinec@gmail.com>
-    FIIT Slovak University of Technology 2016
+    FIIT Slovak University of Technology 2017
     This module is part of master thesis.
 """
-
-"""import pprint
 import db_connection
-import settings
-from string import replace"""
-
+import pprint
 
 from flask import Flask, request, jsonify, json, render_template, Response
 from flask_cors import CORS, cross_origin
+
+
+"""
+import settings
+from string import replace"""
 
 app = Flask(__name__, template_folder='frontend')
 cors = CORS(app, resources={r"/*": {"origins": "*",
@@ -28,7 +29,9 @@ def info():
 @app.route('/get_conf', methods=['GET'])
 def get_conf():
     if request.method == 'GET':
-        return "200 OK"
+        collection = db_connection.get_collection(db=db, collection_name="configurations")
+        conf = db_connection.get_max_date_document(collection)
+        return json.dumps(conf)
 
 
 @app.route('/get_stats', methods=['GET'])
@@ -37,10 +40,9 @@ def get_stats():
         return "200 OK"
 
 
-
 if __name__ == '__main__':
-    # connect database
-    # conn = db_connection.open_connection()
+    # connect and get db
+    db = db_connection.connect_to_db()
     # print "Database connected."
     # start API server
     app.run(debug=True, port=8080)
