@@ -1,0 +1,14 @@
+{
+	"_id": 1,
+	"settings" : {
+		"CoreFiler" : "on",
+		"RamFiler" : "on",
+		"IoOpsFilter" : "off",
+		"DiskFilter" : "on",
+		"JSONFilter" : "off",
+		"ComputeFiler" : "on"
+	},
+	"meta" : {
+		"date" : ISODate("2014-10-01T00:00:00Z")
+	}
+}
