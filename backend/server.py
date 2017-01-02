@@ -25,6 +25,19 @@ def info():
         return "200 OK"
 
 
+@app.route('/get_conf', methods=['GET'])
+def get_conf():
+    if request.method == 'GET':
+        return "200 OK"
+
+
+@app.route('/get_stats', methods=['GET'])
+def get_stats():
+    if request.method == 'GET':
+        return "200 OK"
+
+
+
 if __name__ == '__main__':
     # connect database
     # conn = db_connection.open_connection()
