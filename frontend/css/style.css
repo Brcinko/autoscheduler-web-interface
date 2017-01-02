@@ -1,0 +1,188 @@
+/** {
+	outline: 2px solid black;
+}*/
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	/*position: absolute;*/
+	font-family: Tahoma,Verdana,Segoe,sans-serif;
+	color: #5d5d5d;
+}
+
+header {
+	background: #E2F0D6;
+	font-size: 12px;
+	text-align: right;
+	float: top;
+	border-bottom: 1px solid black;
+	margin: 0;
+	position: fixed;
+	width: 100%;
+}
+
+.main-header {
+
+}
+
+
+.header-p {
+	padding: 3px;
+	margin: 0;
+}
+
+section {
+	/*margin-top: 0 auto;*/
+	height: 100vh;
+}
+
+.menu-section {
+	width: 18%;
+	background: #193644;
+	float: left;
+	list-style-type: none;
+	font-size: 20px;
+}
+
+.menu-ul {
+	list-style-type: none;
+	width: 100%;
+	list-style-position: inside;
+	padding: 0;
+
+}
+
+.menu-li {
+	position: relative;
+	margin: 5px 0px 5px 0px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	/*padding: 3px;*/
+	list-style-type: none;
+    list-style-position:inside;
+
+}
+
+.menu-li:hover {
+	/*background: rgba();*/
+	background: #22495d;
+
+}
+
+.menu-link {
+	text-decoration: none;
+	color: #f6f6f6;
+	padding: 10px 0px 10px 10px;
+	display: block;
+
+}
+
+.main-section {
+	float: right;
+	width: 82%;
+}
+
+.sub-section {
+	margin: 10px 10px 10px 25px;
+}
+
+h1,h2 {
+	font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+	padding: 10px 40px 5px 0px;
+	margin: 15px 10px 20px 0px;
+	border-bottom: 1px solid #5d5d5d;
+	text-align: left;
+	float: left;
+	
+}
+
+h1 {
+	width: 100%;
+	margin-left: 20px;
+	border: none;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+p {
+	padding: 5px 0px 5px 0px;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 40%;
+    margin-left: 200px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: solid 1px #ccc;
+}
+
+tr {
+	background: #ccc;
+}
+
+.td-on {
+	background: #c4fab1;
+}
+
+.td-off {
+	background: #fc9a9a;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #808080;
+    color: white;
+}
+
+.clear {
+	clear: both;
+}
+
+button {
+	background: #aeaeae;
+	border: 1px solid #737373;
+	border-radius: 2px;
+	padding: 2px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+btn:active + .content{
+    background: blue;
+}
+
+
+select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+
+.select-style {
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
