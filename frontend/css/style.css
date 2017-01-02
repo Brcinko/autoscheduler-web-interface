@@ -12,24 +12,38 @@ body {
 }
 
 header {
-	background: #E2F0D6;
+	background: #f0f0f0;
 	font-size: 12px;
 	text-align: right;
-	float: top;
+	/*float: top;*/
 	border-bottom: 1px solid black;
 	margin: 0;
-	position: fixed;
+	/*position: fixed;*/
 	width: 100%;
-}
-
-.main-header {
-
 }
 
 
 .header-p {
 	padding: 3px;
 	margin: 0;
+}
+
+.banner {
+	background: #2b2b2b;
+	margin: 0px;
+}
+
+.banner-p{
+	padding: 10px 0px 10px 30px;
+	margin: 0px;
+	font-size: 26px;
+	color: #fafafa;
+
+}
+
+.logo-edu {
+	color: #f33;
+	font-style: inherit;
 }
 
 section {
@@ -84,6 +98,7 @@ section {
 
 .sub-section {
 	margin: 10px 10px 10px 25px;
+	background: #fbfbfb;
 }
 
 h1,h2 {
