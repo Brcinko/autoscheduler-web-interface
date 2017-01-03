@@ -6,6 +6,9 @@
 
 from settings import DB_PORT, DB_ADDRESS
 from pymongo import MongoClient
+from bson import json_util
+import json
+import pprint
 
 
 def connect_to_db():
@@ -24,9 +27,12 @@ def get_document(collection, document_name):
     document = collection.find_one({"meta.date" : str(document_name)})
     return document
 
-#
+
 def get_max_date_document(collection):
     document = collection.find().sort("meta.date", -1).limit(1)
-    for doc in document:
+    for d in document:
+        doc = json.loads(json_util.dumps(d))
+        doc['_id'] = str(d['_id'])
+        doc['meta']['date'] = str(d['meta']['date'])
         return doc
     return document
