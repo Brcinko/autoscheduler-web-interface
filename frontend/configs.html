@@ -2,22 +2,24 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Index page</title>
+	<title>Scheduler Configuration</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
-</head>
+	<script type="text/javascript" src="script/script.js"></script>
+
+</head>	
 <body>
 	<div class="banner">
 		<p class="banner-p">autosch<span class="logo-edu"><b>edu</b></span>ler</p>
 		<div class="clear"></div>
 	</div>
 	<header class="main-header">
-		<p class="header-p">Last config update: 2013/10/15 16:16:39</p>
+		<p class="header-p">Last config update: 2016/10/15 16:16:39</p>
 	</header>
 	<section class="menu-section">
 		<ul class="menu-ul">
 			<li class="menu-li"><a href="stats.html" class="menu-link">Statistics</a></li>
 			<li class="menu-li"><a href="configs.html" class="menu-link">Configrations</a></li>
-			<li class="menu-li"><a href="#" class="menu-link">Settings</a></li>
+			<li class="menu-li"><a href="setting.html" class="menu-link">Settings</a></li>
 		</ul>	
 	</section>
 	<section class="main-section">
@@ -31,31 +33,39 @@
 				  </tr>
 				  <tr>
 				    <td>CoreFiler</td>
-				    <td class="td-on">ON</td>
+				    <td id="CoreFiler" class="td-on">ON</td>
 				  </tr>
 				  <tr>
 				    <td>RamFiler</td>
-				    <td class="td-on">ON</td>
+				    <td id="RamFiler" class="td-on">ON</td>
 				  </tr>
 				  <tr>
 				    <td>IoOpsFilter</td>
-				    <td class="td-off">OFF</td>
+				    <td id="IoOpsFilter" class="td-off">OFF</td>
 				  </tr>
 				  <tr>
 				    <td>DiskFilter</td>
-				    <td class="td-on">ON</td>
+				    <td id="DiskFilter" class="td-on">ON</td>
 				  </tr>
 				  <tr>
 				    <td>JSONFilter</td>
-				    <td class="td-on">ON</td>
+				    <td id="JSONFilter" class="td-on">ON</td>
 				  </tr>
 				  <tr>
 				    <td>ComputeFiler</td>
-				    <td class="td-off">OFF</td>
+				    <td id="ComputeFiler" class="td-off">OFF</td>
 				  </tr>
 			</table>
 
 		</div>
-	</section>	
+	</section>
+	
+	<script type="text/javascript">
+		alert([ 
+		    document.getElementById('RamFiler');
+		  , document.getElementById('ComputeFiler');
+		]);
+	</script>
+		
 </body>
 </html>

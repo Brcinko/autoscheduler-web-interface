@@ -152,6 +152,10 @@ tr {
 	background: #fc9a9a;
 }
 
+.td-null {
+	background: #FFE9A4;
+}
+
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
