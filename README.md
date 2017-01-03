@@ -5,12 +5,16 @@ This repository contains web interface for OpenStack scheduler automatization so
 
 ## Prerequisities and installation guide
 
-Here comes list of prerequisities, for it is just:
+Here comes list of prerequisities, for now it is just:
 * python 2.7.6
 * Flask
 * pymongo
 * pprint
 * MongoDB
+* json
+* bson
+
+This section will be transformed later into install guide.
 
 ## TODO list
 
@@ -19,11 +23,12 @@ Here comes list of prerequisities, for it is just:
     * display data in table
     * create API call for get conf
   * Backend
-    * figure out automatic UUID
+    * ~~figure out automatic UUID~~
 * Statistics
   * Frontend
     * create API call for get stats
     * create API call for get stats for specific host
+    * display stats data in graphs
   * Backend
     * create API call for get stats
     * create API call for get stats for specific host
