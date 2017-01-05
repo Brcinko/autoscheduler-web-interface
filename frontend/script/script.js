@@ -1,8 +1,8 @@
 	console.log("idem robit request2");
-	/*var request = XMLHttpRequest();
+	var request = new XMLHttpRequest();
 	request.open("GET", "http://localhost:8080/get_conf", true);
 	request.send(null);
-	print(request.responseText);*/
+	console.log(request);
 	//toto sa jaksik nefunguje zatial to musime zistit co s tym
 	//toto pod tym je vramci vyvoja
 	var obj = {
@@ -41,15 +41,23 @@
 
 window.onload = function() {
 	for (k in obj.settings) {
-	   console.log(k, obj.settings[k].conf_status);
+	   // console.log(k, obj.settings[k].conf_status);
 	   //change status clmn in table
-	   var td_class = ".td-" + obj.settings[k].conf_status;
-	   console.log(td_class);
-	   document.getElementById(obj.settings[k].filter_name).className = td_class;
-	   console.log("mame classu");
-	   document.getElementById(obj.settings[k].filter_name).innerHTML = obj.settings[k].conf_status;
-	   
+	   var td_class = "td-" + obj.settings[k].conf_status;
+	   // console.log(td_class);
+	   // console.log(obj.settings[k]);
+	   try{
 
+	   document.getElementById(obj.settings[k].filter_name).className = td_class;
+	} catch(err)
+	{
 
 	}
+	   // console.log("mame classu");
+	   document.getElementById(obj.settings[k].filter_name).innerHTML = obj.settings[k].conf_status;
+	   //$('#'+obj.settings[k].filter_name).class();
 }
+
+}
+
+

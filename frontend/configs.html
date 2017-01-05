@@ -27,7 +27,7 @@
 			<h1>Scheduler Configuration</h1>
 			<div class="clear"></div>
 			<p class="nova"></p>
-			<table>
+			<table id="configs-table">
 			    <th>Filter</th>
 				<th>Status</th>
 				  </tr>
@@ -37,7 +37,7 @@
 				  </tr>
 				  <tr>
 				    <td>RamFiler</td>
-				    <td id="RamFiler" class="td-on">ON</td>
+				    <td id="RamFilter" class="td-on">ON</td>
 				  </tr>
 				  <tr>
 				    <td>IoOpsFilter</td>
@@ -53,7 +53,7 @@
 				  </tr>
 				  <tr>
 				    <td>ComputeFiler</td>
-				    <td id="ComputeFiler" class="td-off">OFF</td>
+				    <td id="ComputeFilter" class="td-off">OFF</td>
 				  </tr>
 			</table>
 
@@ -61,10 +61,7 @@
 	</section>
 	
 	<script type="text/javascript">
-		alert([ 
-		    document.getElementById('RamFiler');
-		  , document.getElementById('ComputeFiler');
-		]);
+		
 	</script>
 		
 </body>

@@ -26,6 +26,7 @@ def info():
         return "200 OK"
 
 
+@cross_origin()
 @app.route('/get_conf', methods=['GET'])
 def get_conf():
     if request.method == 'GET':
@@ -34,6 +35,7 @@ def get_conf():
         return json.dumps(conf)
 
 
+@cross_origin()
 @app.route('/get_stats', methods=['GET'])
 def get_stats():
     if request.method == 'GET':
