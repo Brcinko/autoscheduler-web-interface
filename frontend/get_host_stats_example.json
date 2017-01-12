@@ -1,0 +1,52 @@
+{
+	"_id": 1,
+	"meta": {
+		"host_id": "host-01",
+		"date": ISODate("2016-10-01T00:00:00Z"),
+		"doc_version" : "0.1"
+	},
+	"stats": [
+		{
+			"stat_name" : "hardware.disk.used",
+			"unit": "KB",
+			"value" : "25036980"
+		},
+		{
+			"stat_name" : "hardware.disk.average",
+			"unit": "KB",
+			"value" : "24036980"
+		},
+		{
+			"stat_name" : "hardware.memory.used",
+			"unit": "KB",
+			"value" : "34365002"
+		},
+		{
+			"stat_name" : "hardware.memory.average",
+			"unit": "KB",
+			"value" : "29365002"
+		},
+		{
+			"stat_name" : "compute.node.cpu.percent.used",
+			"unit": "%",
+			"value" : "26"
+		},
+		{
+			"stat_name" : "compute.node.cpu.percent.average",
+			"unit": "%",
+			"value" : "32,2"
+		},
+		{
+			"stat_name" : "hardware.network.incoming.bytes",
+			"unit": "B",
+			"value" : "5436233"
+		},
+		{
+			"stat_name" : "hardware.network.outgoing.bytes",
+			"unit": "B",
+			"value" : "365002336"
+		}
+
+	]
+
+}

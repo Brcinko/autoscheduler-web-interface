@@ -36,3 +36,4 @@ This section will be transformed later into install guide.
 ## Database scheme
 autoschEDUler uses MongoDB which is noSQL database based on JSON (BSON) objects. autoschEDUler (and also webinterface) knows following collection with specific documents:
 * __collection_name__: configurations, __example_file__: frontend/get_conf_example.json
+* __collection_name__: hosts_statistics, __example_file__: frontend/get_hosts_stats_example.json
