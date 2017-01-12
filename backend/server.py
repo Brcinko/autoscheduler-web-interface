@@ -40,8 +40,11 @@ def get_conf():
 def get_hosts_list():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_list")
-        conf = db_connection.get_max_date_document(collection)
-        return json.dumps(conf)
+        hosts = db_connection.get_max_date_document(collection)
+        hostsx = list()
+        for d in hosts['hosts']:
+            hostsx.append(d['host_name'])
+    return json.dumps({"hosts": hostsx})
 
 
 @cross_origin()
