@@ -36,6 +36,15 @@ def get_conf():
 
 
 @cross_origin()
+@app.route('/get_hosts_list', methods=['GET'])
+def get_hosts_list():
+    if request.method == 'GET':
+        collection = db_connection.get_collection(db=db, collection_name="hosts_list")
+        conf = db_connection.get_max_date_document(collection)
+        return json.dumps(conf)
+
+
+@cross_origin()
 @app.route('/get_stats_by_host', methods=['GET'])
 def get_stats():
     if request.method == 'GET':

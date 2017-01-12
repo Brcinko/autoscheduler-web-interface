@@ -1,0 +1,21 @@
+{
+	"_id": 1,
+	"hosts": [
+		{
+			"host_name": "host-01"
+		},
+		{
+			"host_name": "host-02"
+		},
+		{
+			"host_name": "host_03"
+		},
+		{
+			"host_name": "host-backup"
+		}
+	],
+	"meta": {
+		"doc_version": "0.1",
+		"date": ISODate("2016-10-01T00:00:00Z")
+	}
+}
