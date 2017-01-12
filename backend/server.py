@@ -36,10 +36,14 @@ def get_conf():
 
 
 @cross_origin()
-@app.route('/get_stats', methods=['GET'])
+@app.route('/get_stats_by_host', methods=['GET'])
 def get_stats():
     if request.method == 'GET':
-        return "200 OK"
+        collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
+        query = {}
+        query['meta.host_id'] = request.args['host_id']
+        stats = db_connection.get_documents(collection, query)
+        return json.dumps(stats)
 
 
 if __name__ == '__main__':

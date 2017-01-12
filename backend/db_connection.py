@@ -22,10 +22,17 @@ def get_collection(db, collection_name):
     return collection
 
 
-# TODO change this or remove
-def get_document(collection, document_name):
-    document = collection.find_one({"meta.date" : str(document_name)})
-    return document
+def get_documents(collection, query):
+    data = collection.find(query)
+    pprint.pprint(collection.find(query))
+    documents = list()
+    for d in data:
+        doc = json.loads(json_util.dumps(d))
+        doc['_id'] = str(d['_id'])
+        doc['meta']['date'] = str(d['meta']['date'])
+        print str(doc)
+        documents.append(doc)
+    return documents
 
 
 def get_max_date_document(collection):
