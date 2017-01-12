@@ -20,8 +20,8 @@ This section will be transformed later into install guide.
 
 * Configurations
   * Frontend
-    * display data in table
-    * create API call for get conf
+    * ~~display data in table~~
+    * ~~create API call for get conf~~
   * Backend
     * ~~figure out automatic UUID~~
 * Statistics
