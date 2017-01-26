@@ -1,9 +1,9 @@
 window.onload = function () { 
 	getHosts();
-	getGenerallStats();
+	getGeneralStats();
 }
 
-function getResponse(request) {
+/*function getResponse(request) {
 	request.onreadystatechange = function() {
 	  if (request.readyState == 4 && request.status == 200) {
 	    obj = JSON.parse(request.responseText);
@@ -11,14 +11,14 @@ function getResponse(request) {
 	    return obj;
 	  }
 	}
-}
+}*/
 
 function getHosts(){
 	var request = new XMLHttpRequest();
 	request.open("GET", "http://localhost:8080/get_hosts_list", true);
 	request.send(null);
 	//get data from response
-	var obj = getResponse(request);
+	//var obj = getResponse(request);
 	obj = request.onreadystatechange = function() {
 	  if (request.readyState == 4 && request.status == 200) {
 	    // console.log(request.response);
@@ -36,7 +36,7 @@ function getHosts(){
 	    return obj;
 	  }
 	}
-	console.log(obj);
+	//console.log(obj);
 	
 }
 
@@ -51,14 +51,31 @@ function setHost(){
 	http.onreadystatechange = function()
 	{
 	    if(http.readyState == 4 && http.status == 200) {
-	        alert(http.responseText);
+	        console.log(http.responseText);
+	        var stats = JSON.parse(http.responseText);
+
 	    }
 	}
 	http.send(null);
 }
 
-function getGenerallStats(){
-
-
+function getGeneralStats(){
+	var http = new XMLHttpRequest();
+	http.open("GET", "http://localhost:8080/get_general_stats", true);
+	http.send(null);
+	http.onreadystatechange = function()
+	{
+	    if(http.readyState == 4 && http.status == 200) {
+	        var stats = JSON.parse(http.responseText);
+	        console.log(stats);
+	        //toto sa potom moze kludne premenovat a v cykle do vkladania objectu dat aj x os
+	        var y_line = new Object();
+	        y_line.items = [];
+	        for (var i = 0; i < stats.length; i++) { 
+			    y_line.items.push({y: stats[i].meta.date});
+			}
+			console.log(y_line);
+	    }
+	}
 }
 

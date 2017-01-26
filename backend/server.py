@@ -49,11 +49,22 @@ def get_hosts_list():
 
 @cross_origin()
 @app.route('/get_stats_by_host', methods=['GET'])
-def get_stats():
+def get_stats_by_host():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
         query = {}
         query['meta.host_id'] = request.args['host_id']
+        stats = db_connection.get_documents(collection, query)
+        return json.dumps(stats)
+
+
+@cross_origin()
+@app.route('/get_general_stats', methods=['GET'])
+def get_general_stats():
+    if request.method == 'GET':
+        collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
+        query = {}
+        # query['meta.host_id'] = request.args['host_id']
         stats = db_connection.get_documents(collection, query)
         return json.dumps(stats)
 

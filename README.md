@@ -26,9 +26,9 @@ This section will be transformed later into install guide.
     * ~~figure out automatic UUID~~
 * Statistics
   * Frontend
-    * create API call for get stats
-    * create API call for get stats for specific host
-    * create API call for get list of hosts
+    * ~~create API call for get stats~~
+    * ~~create API call for get stats for specific host~~
+    * ~~create API call for get list of hosts~~
     * display stats data in graphs
   * Backend
     * create API call for get stats
