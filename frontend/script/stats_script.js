@@ -23,18 +23,26 @@ function getHosts(){
 	    // console.log(request.response);
 	    obj = JSON.parse(request.responseText);
 	    console.log(obj);
+	    var box = document.getElementById("host-select");
+		obj.hosts.forEach(function(item){
+		    console.log(item);
+		    var opt = document.createElement("option");
+		    
+		    opt.value = item
+		    opt.innerHTML = item;
+		    box.appendChild(opt);
+		});
 	    return obj;
 	  }
 	}
 	console.log(obj)
-	var box = document.getElementById("host-select");
-	obj.hosts.forEach(function(item){
-	    console.log(item);
-	    var opt = document.createElement("option");
-	    
-	    opt.value = item
-	    opt.innerHTML = item;
-	    box.appendChild(opt);
-	});
+	
+}
+
+function setHost(){
+	var x = document.getElementById("host-select").selectedIndex;
+	var host = document.getElementById("host-select").options;
+	console.log(host[x].text);
+	var call_data = "host=" + host[x].text
 }
 
