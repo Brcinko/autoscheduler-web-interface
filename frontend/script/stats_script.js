@@ -1,5 +1,6 @@
 window.onload = function () { 
 	getHosts();
+	getGenerallStats();
 }
 
 function getResponse(request) {
@@ -35,14 +36,29 @@ function getHosts(){
 	    return obj;
 	  }
 	}
-	console.log(obj)
+	console.log(obj);
 	
 }
 
 function setHost(){
 	var x = document.getElementById("host-select").selectedIndex;
 	var host = document.getElementById("host-select").options;
-	console.log(host[x].text);
-	var call_data = "host=" + host[x].text
+	var call_data = "host_id=" + host[x].text;
+	console.log(call_data);
+	// GET request
+	var http = new XMLHttpRequest();
+	http.open("GET", "http://localhost:8080/get_stats_by_host?"+call_data, true);
+	http.onreadystatechange = function()
+	{
+	    if(http.readyState == 4 && http.status == 200) {
+	        alert(http.responseText);
+	    }
+	}
+	http.send(null);
+}
+
+function getGenerallStats(){
+
+
 }
 
