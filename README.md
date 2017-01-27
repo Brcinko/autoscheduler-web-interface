@@ -36,6 +36,7 @@ This section will be transformed later into install guide.
     * ~~create API call for get list of hosts~~
 * Other
   * ~~create hosts_list collection~~
+  * add functionality of displaying last configuration time in header status line
     
 ## Database scheme
 autoschEDUler uses MongoDB which is noSQL database based on JSON (BSON) objects. autoschEDUler (and also webinterface) knows following collection with specific documents:
