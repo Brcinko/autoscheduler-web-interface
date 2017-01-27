@@ -73,7 +73,7 @@ section {
 	/*padding: 3px;*/
 	list-style-type: none;
 	list-style-position:inside;
-    	color: #AEB2B7;
+    color: #AEB2B7;
 }
 
 .menu-li:hover {
@@ -189,7 +189,7 @@ select {
 
 .select-style {
     border: 1px solid #ccc;
-    width: 120px;
+    width: 200px;
     border-radius: 3px;
     overflow: hidden;
     background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
@@ -206,4 +206,33 @@ select {
 
 .select-style select:focus {
     outline: none;
+}
+
+.select-full-width{
+	width: 100%;
+}
+
+.graph {
+	width: 370px;
+	height: 225px;
+	/*border: 1px solid #aaa;
+	background: #ccc;*/
+	margin: 5px 20px 10px 10px;
+
+
+}
+
+.graph-left{
+	float: left;
+}
+
+.graph-right{
+	float: left;
+}
+
+.a-top{
+	float: left;
+	color: #333;
+	width: 100%;
+	padding-left: 5px;
 }
