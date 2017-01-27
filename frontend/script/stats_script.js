@@ -1,6 +1,7 @@
 window.onload = function () { 
 	getHosts();
 	getGeneralStats();
+	displayBasicCharts();
 }
 
 /*function getResponse(request) {
@@ -79,3 +80,39 @@ function getGeneralStats(){
 	}
 }
 
+
+function renderChart(chartID) {
+	var chart = new CanvasJS.Chart(chartID, {
+		theme: "theme1",//theme1
+		title:{
+			text: "Basic Column Chart - CanvasJS"              
+		},
+		animationEnabled: true,   // change to true
+		data: [              
+		{
+			// Change type to "bar", "area", "spline", "pie",etc.
+			type: "column",
+			dataPoints: [
+				{ label: "apple",  y: 10  },
+				{ label: "orange", y: 15  },
+				{ label: "banana", y: 25  },
+				{ label: "mango",  y: 30  },
+				{ label: "grape",  y: 28  }
+			]
+		}
+		]
+	});
+	chart.render();
+}
+
+
+function displayBasicCharts(){
+	renderChart("host-ram-chart");
+	renderChart("host-cpu-chart");
+	renderChart("host-io-chart");
+	renderChart("host-disk-chart");
+	renderChart("general-ram-chart");
+	renderChart("general-cpu-chart");
+	renderChart("general-io-chart");
+	renderChart("general-disk-chart");
+}
