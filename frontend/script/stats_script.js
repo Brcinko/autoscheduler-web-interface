@@ -81,11 +81,11 @@ function getGeneralStats(){
 }
 
 
-function renderChart(chartID) {
+function renderChart(chartID, chartName) {
 	var chart = new CanvasJS.Chart(chartID, {
 		theme: "theme1",//theme1
 		title:{
-			text: "Basic Column Chart - CanvasJS"              
+			text: chartName              
 		},
 		animationEnabled: true,   // change to true
 		data: [              
@@ -107,12 +107,12 @@ function renderChart(chartID) {
 
 
 function displayBasicCharts(){
-	renderChart("host-ram-chart");
-	renderChart("host-cpu-chart");
-	renderChart("host-io-chart");
-	renderChart("host-disk-chart");
-	renderChart("general-ram-chart");
-	renderChart("general-cpu-chart");
-	renderChart("general-io-chart");
-	renderChart("general-disk-chart");
+	renderChart("host-ram-chart", "Host Ram Chart");
+	renderChart("host-cpu-chart", "Host CPU Chart");
+	renderChart("host-io-chart", "Host I/O Chart");
+	renderChart("host-disk-chart", "Host Disk Chart");
+	renderChart("general-ram-chart", "General RAM Chart");
+	renderChart("general-cpu-chart", "General CPU Chart");
+	renderChart("general-io-chart", "General I/O Chart");
+	renderChart("general-disk-chart", "General Disk Chart");
 }
