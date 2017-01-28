@@ -27,7 +27,7 @@ function getHosts(){
 	    console.log(obj);
 	    var box = document.getElementById("host-select");
 		obj.hosts.forEach(function(item){
-		    console.log(item);
+		    //console.log(item);
 		    var opt = document.createElement("option");
 		    
 		    opt.value = item
@@ -52,7 +52,7 @@ function setHost(){
 	http.onreadystatechange = function()
 	{
 	    if(http.readyState == 4 && http.status == 200) {
-	        console.log(http.responseText);
+	        //console.log(http.responseText);
 	        var stats = JSON.parse(http.responseText);
 
 	    }
@@ -68,14 +68,22 @@ function getGeneralStats(){
 	{
 	    if(http.readyState == 4 && http.status == 200) {
 	        var stats = JSON.parse(http.responseText);
-	        console.log(stats);
+	        //console.log(stats);
 	        //toto sa potom moze kludne premenovat a v cykle do vkladania objectu dat aj x os
-	        var y_line = new Object();
-	        y_line.items = [];
+	        var data = new Object();
+	        data.dataPoints = [];
 	        for (var i = 0; i < stats.length; i++) { 
-			    y_line.items.push({y: stats[i].meta.date});
+			    date = stats[i].meta.date;
+			    var obj = stats[i];
+			    for (var j = 0; j < obj.stats.length; j++){
+			    	console.log(obj.stats[j].value);
+					if (obj.stats[j].stat_name == "hardware.disk.used"){
+					    data.dataPoints.push({x: date,
+					    				 y:	obj.stats[j].value});
+					}
+				}
 			}
-			console.log(y_line);
+			console.log(data);
 	    }
 	}
 }
@@ -87,17 +95,29 @@ function renderChart(chartID, chartName) {
 		title:{
 			text: chartName              
 		},
+		toolTip: {
+        	enabled: false  //tooltip disable
+      	},
 		animationEnabled: true,   // change to true
 		data: [              
-		{
+		{ 	//metric values
 			// Change type to "bar", "area", "spline", "pie",etc.
-			type: "column",
+			type: "line",
 			dataPoints: [
 				{ label: "apple",  y: 10  },
 				{ label: "orange", y: 15  },
 				{ label: "banana", y: 25  },
 				{ label: "mango",  y: 30  },
 				{ label: "grape",  y: 28  }
+			]
+		},
+ 
+		{	// dataSeries 2 - average values
+		   	type: "line",
+			   dataPoints:[
+			    {x:1, y:8}, //dataPoint
+			    {x:2, y:9}, //dataPoint
+			    {x:3, y:4} //dataPoint
 			]
 		}
 		]
