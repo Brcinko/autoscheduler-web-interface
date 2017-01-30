@@ -29,14 +29,15 @@ This section will be transformed later into install guide.
     * ~~create API call for get stats~~
     * ~~create API call for get stats for specific host~~
     * ~~create API call for get list of hosts~~
-    * display stats data in graphs
+    * display stats data in graphs - ISSUE
   * Backend
-    * create API call for get stats
+    * ~~create API call for get stats~~
     * ~~create API call for get stats for specific host~~
     * ~~create API call for get list of hosts~~
 * Other
   * ~~create hosts_list collection~~
   * ~~add functionality of displaying last configuration time in header status line~~
+  * **new database collection is desirable** - average statistics needs to be extracted from db in some way
     
 ## Database scheme
 autoschEDUler uses MongoDB which is noSQL database based on JSON (BSON) objects. autoschEDUler (and also webinterface) knows following collection with specific documents:
