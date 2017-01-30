@@ -41,7 +41,7 @@ def get_last_conf_date():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="configurations")
         conf = db_connection.get_max_date_document(collection)
-        return json.dumps(conf['meta']['date'])
+        return conf['meta']['date']
 
 
 @cross_origin()

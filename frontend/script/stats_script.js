@@ -1,7 +1,25 @@
 window.onload = function () { 
+	setLastConfigStatus();
 	getHosts();
 	getGeneralStats();
 	displayBasicCharts();
+}
+
+
+//set status bar on the top of the page
+function setLastConfigStatus(){
+	var request = new XMLHttpRequest();
+	request.open("GET", "http://localhost:8080/get_last_conf", true);
+	request.send(null);
+	request.onreadystatechange = function()
+	{
+	    if(request.readyState == 4 && request.status == 200) {
+	        //console.log(http.responseText);
+	        var date = request.responseText;
+	        document.getElementById("last-config-text").innerHTML = "Last config update: " + date;
+
+	    }
+	}
 }
 
 /*function getResponse(request) {
