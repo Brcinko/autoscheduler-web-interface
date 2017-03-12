@@ -1,33 +1,48 @@
 {
 	"_id": 1,
-    "settings": [
+    "settings":{ 
+        "filters": [
+                {
+                        "filter_name": "RamFilter",
+                        "conf_status": "na"
+                },
+                {
+                        "filter_name": "CoreFilter",
+                        "conf_status": "na"
+                },
+                {
+                        "filter_name": "IoOpsFilter",
+                        "conf_status": "na"
+                },
+                {
+                        "filter_name": "DiskFilter",
+                        "conf_status": "na"
+                },
+                {
+                        "filter_name": "ComputeFilter",
+                        "conf_status": "na"
+                },
+                {
+                        "filter_name": "JSONFilter",
+                        "conf_status": "na"
+                }
+        ],
+        "weights": [
             {
-                    "filter_name": "RamFilter",
-                    "conf_status": "on"
+                "weight_name": "ram_weight",
+                "weight_value": 1.0,
+                "weight_status": "na"
             },
             {
-                    "filter_name": "CoreFiler",
-                    "conf_status": "on"
-            },
-            {
-                    "filter_name": "IoOpsFilter",
-                    "conf_status": "off"
-            },
-            {
-                    "filter_name": "DiskFilter",
-                    "conf_status": "on"
-            },
-            {
-                    "filter_name": "ComputeFiler",
-                    "conf_status": "on"
-            },
-            {
-                    "filter_name": "JSONFilter",
-                    "conf_status": "on"
+                "weight_name": "io_ops_weight",
+                "weight_value": 1.0,
+                "weight_status": "na"
             }
-    ],
+        ]
+    },
 	"meta" : {
 		"date" : ISODate("2014-10-01T00:00:00Z"),
-		"doc_version" : "0.2"
+		"doc_version" : "0.2",
+        "definition": true
 	}
 }

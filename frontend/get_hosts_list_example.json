@@ -16,6 +16,7 @@
 	],
 	"meta": {
 		"doc_version": "0.1",
-		"date": ISODate("2016-10-01T00:00:00Z")
+		"date": ISODate("2016-10-01T00:00:00Z"),
+		"definition": true
 	}
 }

@@ -3,7 +3,8 @@
 	"meta": {
 		"host_id": "host-01",
 		"date": ISODate("2016-10-01T00:00:00Z"),
-		"doc_version" : "0.1"
+		"doc_version" : "0.1",
+		"definition": true
 	},
 	"stats": [
 		{
