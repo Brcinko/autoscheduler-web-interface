@@ -24,7 +24,7 @@
 	</section>
 	<section class="main-section">
 		<div class="sub-section">
-			<h1>Scheduler Configuration</h1>
+			<h1>Filter Configuration</h1>
 			<div class="clear"></div>
 			<p class="nova"></p>
 			<table id="configs-table">
@@ -32,8 +32,8 @@
 				<th>Status</th>
 				  </tr>
 				  <tr>
-				    <td>CoreFiler</td>
-				    <td id="CoreFiler" class="td-on">ON</td>
+				    <td>CoreFilter</td>
+				    <td id="CoreFilter" class="td-on">ON</td>
 				  </tr>
 				  <tr>
 				    <td>RamFiler</td>
@@ -52,11 +52,26 @@
 				    <td id="JSONFilter" class="td-on">ON</td>
 				  </tr>
 				  <tr>
-				    <td>ComputeFiler</td>
+				    <td>ComputeFilter</td>
 				    <td id="ComputeFilter" class="td-off">OFF</td>
 				  </tr>
 			</table>
 
+		</div>
+		<div class="sub-section">
+			<h1>Weight Configuration</h1>
+			<table id="weight-table">
+				<th>Weight name</th>
+				<th>Weight Value</th>
+				<tr>
+					<td>Ram Weight</td>
+					<td id="ram_weight">0.0</td>
+				</tr>
+				<tr>
+					<td>IO Ops Weight</td>
+					<td id="io_ops_weight">0.0</td>
+				</tr>
+			</table>
 		</div>
 	</section>
 	

@@ -36,7 +36,11 @@ def get_documents(collection, query):
 
 
 def get_max_date_document(collection):
-    document = collection.find().sort("meta.date", -1).limit(1)
+    query = {}
+    query['meta.definition'] = {}
+    query['meta.definition']['$nin'] = [True]
+    pprint.pprint(query)
+    document = collection.find(query).sort("meta.date", -1).limit(1)
     for d in document:
         doc = json.loads(json_util.dumps(d))
         doc['_id'] = str(d['_id'])

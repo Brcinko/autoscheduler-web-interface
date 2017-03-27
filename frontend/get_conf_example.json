@@ -4,45 +4,45 @@
         "filters": [
                 {
                         "filter_name": "RamFilter",
-                        "conf_status": "na"
+                        "conf_status": "on"
                 },
                 {
                         "filter_name": "CoreFilter",
-                        "conf_status": "na"
+                        "conf_status": "off"
                 },
                 {
                         "filter_name": "IoOpsFilter",
-                        "conf_status": "na"
+                        "conf_status": "on"
                 },
                 {
                         "filter_name": "DiskFilter",
-                        "conf_status": "na"
+                        "conf_status": "on"
                 },
                 {
                         "filter_name": "ComputeFilter",
-                        "conf_status": "na"
+                        "conf_status": "on"
                 },
                 {
                         "filter_name": "JSONFilter",
-                        "conf_status": "na"
+                        "conf_status": "off"
                 }
         ],
         "weights": [
             {
                 "weight_name": "ram_weight",
                 "weight_value": 1.0,
-                "weight_status": "na"
+                "weight_status": "on"
             },
             {
                 "weight_name": "io_ops_weight",
-                "weight_value": 1.0,
-                "weight_status": "na"
+                "weight_value": 1.5,
+                "weight_status": "on"
             }
         ]
     },
 	"meta" : {
-		"date" : ISODate("2014-10-01T00:00:00Z"),
-		"doc_version" : "0.2",
+		"date" : ISODate("2017-27-03T00:00:00Z"),
+		"doc_version" : "0.3",
         "definition": true
 	}
 }

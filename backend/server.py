@@ -32,6 +32,7 @@ def get_conf():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="configurations")
         conf = db_connection.get_max_date_document(collection)
+        pprint.pprint(conf)
         return json.dumps(conf)
 
 
