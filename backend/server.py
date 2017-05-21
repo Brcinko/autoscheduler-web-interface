@@ -5,6 +5,7 @@
 """
 import db_connection
 import pprint
+import datetime
 
 from flask import Flask, request, jsonify, json, render_template, Response
 from flask_cors import CORS, cross_origin
@@ -62,8 +63,10 @@ def get_hosts_list():
 def get_stats_by_host():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
+        week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
         query = {}
         query['meta.host_id'] = request.args['host_id']
+        query['meta.date'] = {'$lte': datetime.datetime.utcnow(), '$gte': week}
         stats = db_connection.get_documents(collection, query)
         return json.dumps(stats)
 
@@ -73,7 +76,8 @@ def get_stats_by_host():
 def get_general_stats():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
-        query = {}
+        week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
+        query = {"meta.date": {'$lte': datetime.datetime.utcnow(), '$gte': week}}
         # query['meta.host_id'] = request.args['host_id']
         stats = db_connection.get_documents(collection, query)
         return json.dumps(stats)

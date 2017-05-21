@@ -13,7 +13,7 @@
 			"value" : "25036980"
 		},
 		{
-			"stat_name" : "hardware.disk.average",
+			"stat_name" : "hardware.disk.total",
 			"unit": "KB",
 			"value" : "24036980"
 		},
@@ -23,7 +23,7 @@
 			"value" : "34365002"
 		},
 		{
-			"stat_name" : "hardware.memory.average",
+			"stat_name" : "hardware.memory.total",
 			"unit": "KB",
 			"value" : "29365002"
 		},
@@ -33,7 +33,7 @@
 			"value" : "26"
 		},
 		{
-			"stat_name" : "compute.node.cpu.percent.average",
+			"stat_name" : "compute.node.cpu.percent.total",
 			"unit": "%",
 			"value" : "32,2"
 		},

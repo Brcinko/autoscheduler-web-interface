@@ -6,13 +6,10 @@ window.onload = function () {
 }
 
 //this should be taken from database probably
-//!IMPORTANT TODO! - network parameters are not average just incoming in one list and outgoing in another
-var average_parameters = ['hardware.disk.used','hardware.memory.used','compute.node.cpu.percent.used',
-							'hardware.network.incoming.bytes'];
-var metric_parameters = ['hardware.disk.used','hardware.memory.used','compute.node.cpu.percent.used',
-							'hardware.network.outgoing.bytes'];
-var host_chart_id = ['host-disk-chart','host-ram-chart', 'host-cpu-chart', 'host-net-chart'];
-var general_chart_id = ['general-disk-chart','general-ram-chart', 'general-cpu-chart', 'general-net-chart'];
+var average_parameters = ['hardware.system_stats.io.used','hardware.memory.used'];
+var metric_parameters = ['hardware.system_stats.io.used','hardware.memory.used'];
+var host_chart_id = ['host-io-chart','host-ram-chart'];
+var general_chart_id = ['general-io-chart','general-ram-chart'];
 
 //set status bar on the top of the page
 function setLastConfigStatus(){
@@ -109,7 +106,7 @@ function getGeneralStats(){
 	        	metricData = setChartData(metric_parameters[x], stats);
 	        	averageData = setChartData(average_parameters[x], stats);
 				try{
-					renderChart(general_chart_id[x], "Host Ram Chart", averageData, metricData);
+					renderChart(general_chart_id[x], "General Ram Chart", averageData, metricData);
 				}catch(err){
 					console.log(err);
 				}
@@ -129,11 +126,11 @@ function setChartData(parameter, stats){
 	    for (var j = 0; j < obj.stats.length; j++){
 			if (obj.stats[j].stat_name == parameter){
 			    data.dataPoints.push({x: date,
-			    				 y:	obj.stats[j].value});
+			    				 y:	parseFloat(obj.stats[j].value)});
 			}
 		}
 	}
-	console.log(JSON.stringify(data));
+	console.log(data);
 	return data;
 }
 
@@ -162,7 +159,7 @@ function displayBasicCharts(){
 			   dataPoints:[
 			    {x:1, y:8}, //dataPoint
 			    {x:2, y:9}, //dataPoint
-			    {x:3, y:4} //dataPoint
+			    {x:5, y:4} //dataPoint
 			]
 		};
 	var metricData = 		{ 	//metric values
@@ -177,12 +174,11 @@ function displayBasicCharts(){
 			]
 		};
 
+
 	renderChart("host-ram-chart", "Host Ram Chart", averageData, metricData);
-	renderChart("host-cpu-chart", "Host CPU Chart", averageData, metricData);
-	renderChart("host-net-chart", "Host I/O Chart", averageData, metricData);
-	renderChart("host-disk-chart", "Host Disk Chart", averageData, metricData);
+	renderChart("host-io-chart", "Host IO Chart", averageData, metricData);
+
 	renderChart("general-ram-chart", "General RAM Chart", averageData, metricData);
-	renderChart("general-cpu-chart", "General CPU Chart", averageData, metricData);
-	renderChart("general-net-chart", "General I/O Chart", averageData, metricData);
-	renderChart("general-disk-chart", "General Disk Chart", averageData, metricData);
+	renderChart("general-io-chart", "General IO Chart", averageData, metricData);
+
 }
