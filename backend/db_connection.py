@@ -23,15 +23,15 @@ def get_collection(db, collection_name):
 
 
 def get_documents(collection, query):
-    print query
+    print "DB Query: ", query
     data = collection.find(query)
     documents = list()
     for d in data:
         doc = json.loads(json_util.dumps(d))
         doc['_id'] = str(d['_id'])
         doc['meta']['date'] = str(d['meta']['date'])
-        print str(doc)
         documents.append(doc)
+    # pprint.pprint(documents)
     return documents
 
 

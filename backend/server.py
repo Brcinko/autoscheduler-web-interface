@@ -19,6 +19,8 @@ app = Flask(__name__, template_folder='frontend')
 cors = CORS(app, resources={r"/*": {"origins": "*",
                                     "methods": " [GET, HEAD, POST, OPTIONS, PUT, PATCH, DELETE]",
                                     "headers": "*"}})
+WEIGHTS_DICTIONARY = ['hardware.memory.total', 'hardware.system_stats.io.total' ]
+
 
 
 @app.route('/info', methods=['GET'])
@@ -63,12 +65,14 @@ def get_hosts_list():
 def get_stats_by_host():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
-        week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
+        week = datetime.datetime.utcnow() - datetime.timedelta(days=21)
         query = {}
         query['meta.host_id'] = request.args['host_id']
-        query['meta.date'] = {'$lte': datetime.datetime.utcnow(), '$gte': week}
+        query['meta.date'] = {}
+        query['meta.date']['$gte'] = week
         stats = db_connection.get_documents(collection, query)
-        return json.dumps(stats)
+        serialized_stats = serialize_stats(stats)
+        return json.dumps(serialized_stats)
 
 
 @cross_origin()
@@ -76,16 +80,74 @@ def get_stats_by_host():
 def get_general_stats():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
-        week = datetime.datetime.utcnow() - datetime.timedelta(days=7)
-        query = {"meta.date": {'$lte': datetime.datetime.utcnow(), '$gte': week}}
-        # query['meta.host_id'] = request.args['host_id']
+        week = datetime.datetime.utcnow() - datetime.timedelta(days=21)
+        query = dict()
+        query['meta.date'] = {}
+        query['meta.date']['$gte'] = week
+
         stats = db_connection.get_documents(collection, query)
-        return json.dumps(stats)
+        serialized_stats = serialize_stats(stats)
+        pprint.pprint(serialized_stats)
+        return json.dumps(serialized_stats)
+
+
+def serialize_stats(stats):
+    day_stats = list()
+    days = list()
+    for s in stats:
+        days.append(datetime.datetime.strptime(s['meta']['date'][:10], "%Y-%m-%d"))
+    days = list(set(days))
+    days.sort()
+    for day in days:
+        day_statsx = dict()
+        day_statsx['meta'] = dict()
+        day_statsx['meta']['host_id'] = s['meta']['host_id']
+        day_statsx['meta']['date'] = str(day)
+        day_statsx['stats'] = list()
+        for s in stats:
+
+            for p in stats:
+                if datetime.datetime.strptime(p['meta']['date'][:10], "%Y-%m-%d") == day:
+                    day_statsx['stats'] += p['stats']
+        # pprint.pprint(day_statsx)
+        day_stats.append(day_statsx)
+    response = list()
+
+    for d in day_stats:
+        pprint.pprint(
+            d['meta']
+        )
+        responsex = dict()
+        responsex['meta'] = dict()
+        responsex['meta']['host_id'] = d['meta']['host_id']
+        responsex['meta']['date'] = d['meta']['date']
+        responsex['stats'] = list()
+        stat_record = dict()
+        for w in WEIGHTS_DICTIONARY:
+            # pprint.pprint(d['stats'][0])
+            stat_record['stat_name'] = d['stats'][0]['stat_name']
+            stat_record['unit'] = d['stats'][0]['unit']
+            values = list()
+            for s in d['stats']:
+
+                if s['stat_name'] == w:
+                    values.append(float(s['value']))
+            stat_record['value'] = compute_load(values)
+            responsex['stats'].append(stat_record)
+        response.append(responsex)
+    return response
+
+
+def compute_load(values):
+    average = 0
+    if len(values) > 0:
+        average = sum(values) / len(values)
+    return average
 
 
 if __name__ == '__main__':
     # connect and get db
     db = db_connection.connect_to_db()
-    # print "Database connected."
+    print "Database connected."
     # start API server
     app.run(debug=True, port=8080)
