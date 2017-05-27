@@ -19,7 +19,7 @@ app = Flask(__name__, template_folder='frontend')
 cors = CORS(app, resources={r"/*": {"origins": "*",
                                     "methods": " [GET, HEAD, POST, OPTIONS, PUT, PATCH, DELETE]",
                                     "headers": "*"}})
-WEIGHTS_DICTIONARY = ['hardware.memory.total', 'hardware.system_stats.io.total' ]
+WEIGHTS_DICTIONARY = ['hardware.system_stats.io.used','hardware.memory.used']
 
 
 
@@ -65,13 +65,14 @@ def get_hosts_list():
 def get_stats_by_host():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
-        week = datetime.datetime.utcnow() - datetime.timedelta(days=21)
+        week = datetime.datetime.utcnow() - datetime.timedelta(days=25)
         query = {}
         query['meta.host_id'] = request.args['host_id']
         query['meta.date'] = {}
         query['meta.date']['$gte'] = week
         stats = db_connection.get_documents(collection, query)
         serialized_stats = serialize_stats(stats)
+        pprint.pprint(serialized_stats)
         return json.dumps(serialized_stats)
 
 
@@ -80,7 +81,7 @@ def get_stats_by_host():
 def get_general_stats():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="hosts_statistics")
-        week = datetime.datetime.utcnow() - datetime.timedelta(days=21)
+        week = datetime.datetime.utcnow() - datetime.timedelta(days=25)
         query = dict()
         query['meta.date'] = {}
         query['meta.date']['$gte'] = week
@@ -114,23 +115,21 @@ def serialize_stats(stats):
     response = list()
 
     for d in day_stats:
-        pprint.pprint(
-            d['meta']
-        )
+        # pprint.pprint(
+        #     d['meta']
+        # )
         responsex = dict()
         responsex['meta'] = dict()
         responsex['meta']['host_id'] = d['meta']['host_id']
         responsex['meta']['date'] = d['meta']['date']
-        responsex['stats'] = list()
-        stat_record = dict()
+        responsex['stats'] = []
         for w in WEIGHTS_DICTIONARY:
-            # pprint.pprint(d['stats'][0])
-            stat_record['stat_name'] = d['stats'][0]['stat_name']
-            stat_record['unit'] = d['stats'][0]['unit']
+            stat_record = dict()
             values = list()
             for s in d['stats']:
-
                 if s['stat_name'] == w:
+                    stat_record['stat_name'] = s['stat_name']
+                    stat_record['unit'] = s['unit']
                     values.append(float(s['value']))
             stat_record['value'] = compute_load(values)
             responsex['stats'].append(stat_record)
@@ -142,7 +141,7 @@ def compute_load(values):
     average = 0
     if len(values) > 0:
         average = sum(values) / len(values)
-    return average
+    return '%.1f' % round(average, 1)
 
 
 if __name__ == '__main__':

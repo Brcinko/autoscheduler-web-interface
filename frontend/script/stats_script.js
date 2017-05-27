@@ -10,6 +10,8 @@ var average_parameters = ['hardware.system_stats.io.used','hardware.memory.used'
 var metric_parameters = ['hardware.system_stats.io.used','hardware.memory.used'];
 var host_chart_id = ['host-io-chart','host-ram-chart'];
 var general_chart_id = ['general-io-chart','general-ram-chart'];
+var general_chart_name = ['General IO Chart', 'General RAM Chart']
+var host_chart_name = ['Host IO Chart', 'Host RAM Chart']
 
 //set status bar on the top of the page
 function setLastConfigStatus(){
@@ -79,9 +81,9 @@ function setHost(){
 	        var stats = JSON.parse(http.responseText);
 	        for(x = 0; x < general_chart_id.length; x++){
 	        	metricData = setChartData(metric_parameters[x], stats);
-	        	averageData = setChartData(average_parameters[x], stats);
+	        	//averageData = setChartData(average_parameters[x], stats);
 				try{
-					renderChart(host_chart_id[x], "Host Ram Chart", averageData, metricData);
+					renderHostChart(host_chart_id[x], host_chart_name[x], metricData);
 				}catch(err){
 					console.log(err);
 				}
@@ -106,7 +108,7 @@ function getGeneralStats(){
 	        	metricData = setChartData(metric_parameters[x], stats);
 	        	averageData = setChartData(average_parameters[x], stats);
 				try{
-					renderChart(general_chart_id[x], "General Ram Chart", averageData, metricData);
+					renderHostChart(general_chart_id[x], general_chart_name[x], averageData, metricData);
 				}catch(err){
 					console.log(err);
 				}
@@ -124,13 +126,15 @@ function setChartData(parameter, stats){
 	    date = stats[i].meta.date.substring(0,10);
 	    var obj = stats[i];
 	    for (var j = 0; j < obj.stats.length; j++){
+
 			if (obj.stats[j].stat_name == parameter){
-			    data.dataPoints.push({x: date,
+				console.log(obj.stats[j].stat_name, j, parameter)
+			    data.dataPoints.push({label: date,
 			    				 y:	parseFloat(obj.stats[j].value)});
 			}
 		}
 	}
-	console.log(data);
+	console.log(JSON.stringify(data));
 	return data;
 }
 
@@ -153,29 +157,47 @@ function renderChart(chartID, chartName, averageData, metricData) {
 }
 
 
+function renderHostChart(chartID, chartName, metricData) {
+	var chart = new CanvasJS.Chart(chartID, {
+		theme: "theme1",//theme1
+		title:{
+			text: chartName              
+		},
+		toolTip: {
+        	enabled: false  //tooltip disable
+      	},
+		animationEnabled: true,   // change to true
+		data: [            
+			metricData
+		]
+	});
+	chart.render();
+}
+
+
 function displayBasicCharts(){
 	var averageData = {	// dataSeries 2 - average values
 		   	type: "line",
 			   dataPoints:[
-			    {x:1, y:8}, //dataPoint
+			    /*{x:1, y:8}, //dataPoint
 			    {x:2, y:9}, //dataPoint
-			    {x:5, y:4} //dataPoint
+			    {x:5, y:4} //dataPoint*/
 			]
 		};
 	var metricData = 		{ 	//metric values
 			// Change type to "bar", "area", "spline", "pie",etc.
 			type: "line",
 			dataPoints: [
-				{ label: "apple",  y: 10  },
+				/*{ label: "apple",  y: 10  },
 				{ label: "orange", y: 15  },
 				{ label: "banana", y: 25  },
 				{ label: "mango",  y: 30  },
-				{ label: "grape",  y: 28  }
+				{ label: "grape",  y: 28  }*/
 			]
 		};
 
 
-	renderChart("host-ram-chart", "Host Ram Chart", averageData, metricData);
+	renderChart("host-ram-chart", "Host RAM Chart", averageData, metricData);
 	renderChart("host-io-chart", "Host IO Chart", averageData, metricData);
 
 	renderChart("general-ram-chart", "General RAM Chart", averageData, metricData);
