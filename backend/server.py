@@ -22,7 +22,6 @@ cors = CORS(app, resources={r"/*": {"origins": "*",
 WEIGHTS_DICTIONARY = ['hardware.system_stats.io.used','hardware.memory.used']
 
 
-
 @app.route('/info', methods=['GET'])
 def info():
     if request.method == 'GET':
@@ -35,7 +34,8 @@ def get_conf():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="configurations")
         conf = db_connection.get_max_date_document(collection)
-        pprint.pprint(conf)
+        # pprint.pprint(conf)
+        print "Info: response from /get_conf OK"
         return json.dumps(conf)
 
 
@@ -45,6 +45,7 @@ def get_last_conf_date():
     if request.method == 'GET':
         collection = db_connection.get_collection(db=db, collection_name="configurations")
         conf = db_connection.get_max_date_document(collection)
+        print "Info: returned {} from /get_last_conf". format(conf['meta']['date'])
         return conf['meta']['date']
 
 
@@ -57,6 +58,7 @@ def get_hosts_list():
         hostsx = list()
         for d in hosts['hosts']:
             hostsx.append(d['host_name'])
+    print "Info: Returned host list from /get_hosts_list"
     return json.dumps({"hosts": hostsx})
 
 
@@ -71,8 +73,8 @@ def get_stats_by_host():
         query['meta.date'] = {}
         query['meta.date']['$gte'] = week
         stats = db_connection.get_documents(collection, query)
-        serialized_stats = serialize_stats(stats)
-        pprint.pprint(serialized_stats)
+        serialized_stats = serialize_stats(stats, False)
+        print "Info: Reponse from /get_stats_by_host OK"
         return json.dumps(serialized_stats)
 
 
@@ -87,12 +89,60 @@ def get_general_stats():
         query['meta.date']['$gte'] = week
 
         stats = db_connection.get_documents(collection, query)
-        serialized_stats = serialize_stats(stats)
-        pprint.pprint(serialized_stats)
+        serialized_stats = serialize_stats(stats, True)
+
+        print "Info: Reponse from /get_general_stats OK",
         return json.dumps(serialized_stats)
 
 
-def serialize_stats(stats):
+def serialize_stats(stats, general_flag):
+
+
+    host_list = ['oscompute-1', 'oscompute-2']
+    if general_flag is True:
+        day_stats = list()
+        days = list()
+        for s in stats:
+            days.append(datetime.datetime.strptime(s['meta']['date'][:10], "%Y-%m-%d"))
+        days = list(set(days))
+        days.sort()
+        response = []
+        for h in host_list:
+            for day in days:
+                day_statsx = dict()
+                day_statsx['meta'] = dict()
+                day_statsx['meta']['date'] = str(day)
+                day_statsx['stats'] = list()
+                day_statsx['meta']['host_id'] = h
+                for s in stats:
+                    if h == s['meta']['host_id']:
+                        if datetime.datetime.strptime(s['meta']['date'][:10], "%Y-%m-%d") == day:
+                            day_statsx['stats'] += s['stats']
+                day_stats.append(day_statsx)
+        for d in day_stats:
+            responsex = dict()
+            responsex['meta'] = dict()
+            responsex['meta']['host_id'] = d['meta']['host_id']
+            responsex['meta']['date'] = d['meta']['date']
+            responsex['stats'] = []
+            for w in WEIGHTS_DICTIONARY:
+                stat_record = dict()
+                values = list()
+                for s in d['stats']:
+                    if s['stat_name'] == w:
+                        stat_record['stat_name'] = s['stat_name']
+                        stat_record['unit'] = s['unit']
+                        values.append(float(s['value']))
+                stat_record['value'] = compute_load(values)
+                responsex['stats'].append(stat_record)
+            response.append(responsex)
+        return response
+
+
+
+
+
+
     day_stats = list()
     days = list()
     for s in stats:
